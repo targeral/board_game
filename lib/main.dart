@@ -1,34 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
-void main() => runApp(MyApp());
+class MyAppBar extends StatelessWidget {
+    MyAppBar({this.title});
 
-class MyApp extends StatelessWidget {
+    final Widget title;
+
     @override
     Widget build(BuildContext context) {
-        return MaterialApp(
-            title: 'Welcome to Flutter',
-            home: Scaffold(
-                appBar: AppBar(
-                    title: Text('afdadf')
-                ),
-                body: Center(
-                    child: RandomWords()
-                ),
+        return new Container(
+            height: 56.0,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            margin: const EdgeInsets.only(top: 30),
+            child: new Row(
+                children: <Widget>[
+                    new IconButton(
+                        icon: new Icon(Icons.menu),
+                        tooltip: 'Navigation menu',
+                        onPressed: null,
+                    ),
+                    new Expanded(
+                        child: title,
+                    ),
+                    new IconButton(
+                        icon: new Icon(Icons.search),
+                        tooltip: 'Search',
+                        onPressed: null,
+                    )
+                ],
             ),
         );
     }
 }
 
-class RandomWordsState extends State<RandomWords> {
+class Myscaffold extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
-        final wordPair = WordPair.random();
-        return Text(wordPair.asPascalCase);
+        return new Material(
+            child: new Column(
+                children: <Widget>[
+                    new MyAppBar(
+                        title: new Text(
+                            'example title',
+                            style: Theme.of(context).primaryTextTheme.title,
+                        ),
+                    ),
+                    new Expanded(
+                        child: new Center(
+                            child: new Text('hello world'),
+                        ),
+                    ),
+                ],
+            ),
+        );
     }
 }
 
-class RandomWords extends StatefulWidget {
-    @override
-    RandomWordsState createState() => RandomWordsState();
+void main() {
+    runApp(new MaterialApp(
+        title: 'My app',
+        home: new Myscaffold(),
+    ));
 }
