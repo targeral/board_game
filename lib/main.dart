@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import './utils/utils.dart';
+import './pages/login.dart';
+import './pages/ChatList.dart';
 
 class MyAppBar extends StatelessWidget {
     MyAppBar({this.title});
@@ -46,7 +49,12 @@ class Myscaffold extends StatelessWidget {
                     ),
                     new Expanded(
                         child: new Center(
-                            child: new Text('hello world'),
+                            child: new RaisedButton(
+                                child: new Text('go to login'),
+                                onPressed: () {
+                                    goTo('/login', context);
+                                },
+                            )
                         ),
                     ),
                 ],
@@ -59,5 +67,9 @@ void main() {
     runApp(new MaterialApp(
         title: 'My app',
         home: new Myscaffold(),
+        routes: <String, WidgetBuilder> {
+            '/login': transformRouter(LoginPage()),
+            '/chatlist': transformRouter(ChatList()),
+        },
     ));
 }
